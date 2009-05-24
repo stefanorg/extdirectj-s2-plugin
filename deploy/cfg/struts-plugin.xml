@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <package name="extdirectj" namespace="/extdirectj" extends="struts-default">
+		<interceptors>
+      		<interceptor name="extdirectj" class="it.extdirectj.interceptor.ExtDirectJInterceptor"/>     		
+   		</interceptors>
+		
+        <action name="ExtDirectJRouter" class="it.extdirectj.core.ExtDirectJRouter">
+       	
+			<interceptor-ref name="extdirectj"/>
+			<interceptor-ref name="defaultStack"/>
+			
+			<result name="apiresponse" type="freemarker">/it/extdirectj/views/api.ftl</result>
+            <result name="error" type="freemarker">/it/extdirectj/views/extdirectjexception.ftl</result>
+            <result name="transresponse" type="freemarker">/it/extdirectj/views/transactionresponse.ftl</result>
+        </action>
+
+        
+
+        <!-- Add actions here -->
+    </package>
+</struts>

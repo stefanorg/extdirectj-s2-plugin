@@ -5,12 +5,10 @@ import java.util.ArrayList;
 public class ExtDirectJAction{
 
 	private String name;
-	private transient String className;
 	private ArrayList<ExtDirectJMethod> methods = new ArrayList<ExtDirectJMethod>();
 	
-	public ExtDirectJAction(String name,String className) {
+	public ExtDirectJAction(String name) {
 		this.name = name;
-		this.className = className;
 	}
 
 	public String getName() {
@@ -21,14 +19,6 @@ public class ExtDirectJAction{
 		this.name = name;
 	}
 
-	public String getClassName() {
-		return className;
-	}
-
-	public void setClassName(String className) {
-		this.className = className;
-	}
-	
 	public void addMethod(ExtDirectJMethod method) {
 		this.methods.add(method);
 	}
@@ -36,6 +26,10 @@ public class ExtDirectJAction{
 	public ExtDirectJMethod[] getMethods(){
 		return this.methods.toArray(new ExtDirectJMethod[this.methods.size()]);
 	}
+
+   public boolean hasMethods() {
+      return this.methods.size() > 0;   
+   }
 	
 	public ExtDirectJMethod getMethodByName(String methodName) throws NoSuchMethodException{
 		for (ExtDirectJMethod method : this.methods) {

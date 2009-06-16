@@ -8,7 +8,10 @@ public class ExtDirectJApiResponse{
 	private String nameSpace;
 	private String type = "remoting";
 	private ArrayList<ExtDirectJAction> actions = new ArrayList<ExtDirectJAction>();
-	
+
+   public ExtDirectJApiResponse() {
+   }
+
 	public ExtDirectJApiResponse(String url, String namespace) {
 		this.url = url;
 		this.nameSpace = namespace;
@@ -21,6 +24,10 @@ public class ExtDirectJApiResponse{
 	public ExtDirectJAction[] getActions() {
 		return this.actions.toArray(new ExtDirectJAction[this.actions.size()]);
 	}
+
+   public boolean hasActions() {
+      return this.actions.size() > 0;
+   }
 	
 	public String getUrl() {
 		return url;

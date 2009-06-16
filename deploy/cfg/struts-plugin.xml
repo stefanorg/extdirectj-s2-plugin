@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC
-        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-        "http://struts.apache.org/dtds/struts-2.0.dtd">
+      "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+      "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
 
-    <package name="extdirectj" namespace="/extdirectj" extends="struts-default">
-		<interceptors>
-      		<interceptor name="extdirectj" class="it.extdirectj.interceptor.ExtDirectJInterceptor"/>     		
-   		</interceptors>
-		
-        <action name="ExtDirectJRouter" class="it.extdirectj.core.ExtDirectJRouter">
-       	
-			<interceptor-ref name="extdirectj"/>
-			<interceptor-ref name="defaultStack"/>
-			
-			<result name="apiresponse" type="freemarker">/it/extdirectj/views/api.ftl</result>
-            <result name="error" type="freemarker">/it/extdirectj/views/extdirectjexception.ftl</result>
-            <result name="transresponse" type="freemarker">/it/extdirectj/views/transactionresponse.ftl</result>
-        </action>
+   <bean type="com.opensymphony.xwork2.ActionProxyFactory" name="extdirectj" class="it.extdirectj.core.ExtDirectJActionProxyFactory"/>
+   <bean class="it.extdirectj.core.ExtDirectJConfiguration"/>
+   <bean class="it.extdirectj.core.ExtDirectJsonParser"/>
 
-        
+   <constant name="extdirectj.apiPrefix" value="Ext.app.REMOTING_API" />
+   <constant name="extdirectj.apiUrl" value="extdirectj\/ExtDirectJRouter.action" />
+   <constant name="extdirectj.apiNamespace" value="" />
 
-        <!-- Add actions here -->
-    </package>
+   <!--  Make the ExtDirectJ ActionProxy factory the automatic default -->
+   <constant name="struts.actionProxyFactory" value="extdirectj" />
+
+   <package name="extdirectj" namespace="/extdirectj" extends="struts-default">
+
+      <interceptors>
+         <interceptor name="extdirectj" class="it.extdirectj.interceptor.ExtDirectJInterceptor"/>
+      </interceptors>
+
+      <global-results>
+         <result name="transresponse" type="freemarker">/it/extdirectj/views/transactionresponse.ftl</result>
+         <result name="error" type="freemarker">/it/extdirectj/views/extdirectjexception.ftl</result>
+      </global-results>
+
+      <action name="ExtDirectJRouter" class="it.extdirectj.core.ExtDirectJRouter">
+         <interceptor-ref name="defaultStack"/>
+         <result name="apiresponse" type="freemarker">/it/extdirectj/views/api.ftl</result>
+         <result name="success" type="chain">${action.name}</result>
+      </action>
+
+   </package>
 </struts>

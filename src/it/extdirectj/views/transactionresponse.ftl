@@ -2,7 +2,7 @@
 [{ 
 	"action":"${extdirectjResponse.action}"
 	,"method":"${extdirectjResponse.method}"
-	,"result":"${extdirectjResponse.result}"
+	,"result":${extdirectjResponse.result}
 	,"type":"${extdirectjResponse.type}"
 	,"tid":${extdirectjResponse.tid}
  }]

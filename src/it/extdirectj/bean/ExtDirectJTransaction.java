@@ -8,7 +8,7 @@ public class ExtDirectJTransaction {
 
 	private String action = "";
 	private String method = "";
-	private List<String> data = new ArrayList<String>();
+	private List<ExtDirectJType> data = new ArrayList<ExtDirectJType>();
 	private String type = "";
 	private int tid;
 	
@@ -24,16 +24,10 @@ public class ExtDirectJTransaction {
 	public void setMethod(String method) {
 		this.method = method;
 	}
-	public String[] getData() {
-		return data.toArray(new String[data.size()]);
-	}
-	public void setData(String[] data) {
-		this.data = new ArrayList<String>();
-		for (String d : data) {
-			this.data.add(d);
-		}
-	}
-	public String getType() {
+   public List<ExtDirectJType> getData() {
+      return data;
+   }
+   public String getType() {
 		return type;
 	}
 	public void setType(String type) {
@@ -45,7 +39,4 @@ public class ExtDirectJTransaction {
 	public void setTid(int tid) {
 		this.tid = tid;
 	}
-	
-	
-	
 }
